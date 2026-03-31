@@ -1,100 +1,124 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viktor Website</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: black;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      color: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Super Coole Site</title>
+    <style>
+        /* Google Fonts importeren */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
-    h1 {
-      font-size: 3rem;
-      opacity: 0;
-      transform: scale(0.5);
-      animation: intro 2s ease-out forwards;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    @keyframes intro {
-      0% {
-        opacity: 0;
-        transform: scale(0.2) rotate(-20deg);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.2) rotate(5deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(0);
-      }
-    }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+            overflow: hidden;
+        }
 
-    .glow {
-      text-shadow: 0 0 10px cyan, 0 0 20px cyan, 0 0 40px cyan;
-    }
+        /* Bewegende achtergrond cirkels */
+        .circle {
+            position: absolute;
+            background: linear-gradient(#ff00cc, #3333ff);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(30px);
+            animation: move 10s infinite alternate;
+        }
 
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-  </style>
+        .circle1 { width: 300px; height: 300px; top: -50px; left: -50px; }
+        .circle2 { width: 200px; height: 200px; bottom: -50px; right: -50px; animation-delay: -5s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 100px); }
+        }
+
+        /* De Glas-kaart */
+        .container {
+            position: relative;
+            width: 400px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        p {
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        /* De "Mega Coole" Knoppen */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 1);
+            color: #24243e;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: #ff00cc;
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #24243e;
+        }
+
+    </style>
 </head>
 <body>
 
-<canvas id="bg"></canvas>
-<h1 class="glow">viktorvanderaerschot1</h1>
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
 
-<script>
-  const canvas = document.getElementById('bg');
-  const ctx = canvas.getContext('2d');
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let particles = [];
-
-  for (let i = 0; i < 100; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 2,
-      speedY: Math.random() * 1 + 0.2
-    });
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = 'cyan';
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-
-      p.y += p.speedY;
-
-      if (p.y > canvas.height) {
-        p.y = 0;
-        p.x = Math.random() * canvas.width;
-      }
-    });
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-</script>
+    <div class="container">
+        <h1>Welkom!</h1>
+        <p>Dit is mijn mega coole website, live gehost via GitHub Pages.</p>
+        
+        <a href="#" class="btn">Mijn Projecten</a>
+        <a href="#" class="btn btn-outline">Contact Mij</a>
+        <a href="https://github.com/jouwnaam" class="btn">GitHub Profiel</a>
+    </div>
 
 </body>
 </html>
